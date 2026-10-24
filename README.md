@@ -1,3 +1,16 @@
+# Implemented solution
+
+The runnable solution is documented in [`code/README.md`](code/README.md). From the repository root:
+
+```bash
+python3 code/main.py --dataset dataset --requests dataset/deletion_requests.csv --output output.csv
+python3 code/evaluation/main.py output.csv
+```
+
+The engine builds a temporal, record-scoped evidence view and applies policy deterministically. Workflow/activity events are only **candidate association** signals: they may link a target resource when temporally close (±10 minutes), but never prove final state. Final decisions require independent, participant-visible state evidence at or before `audit_at`; ambiguous associations are rejected. SQL snapshots are processed only in a guarded in-memory SQLite workflow with restricted authorization, never against external databases. Public sample answers are used only by the evaluator, never by inference.
+
+---
+
 # HackerRank Orchestrate - October 2026
 
 ## Ghost Data Still Exists
